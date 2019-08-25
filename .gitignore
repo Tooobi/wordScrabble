@@ -1,0 +1,48 @@
+# IDEA
+.idea
+*.ipr
+*.iws
+*.iml
+
+# Eclipse
+.classpath
+.project
+.settings
+
+# typescript
+.tscache/
+src/main/typescript/tmp/
+src/main/typescript/.baseDir.ts
+typings/
+node_modules/
+public/
+coverage/
+*.jsx
+
+build
+dist/
+lib/
+js/
+
+#exclude vendor folder
+.code
+.idea
+.scannerwork/
+node_modules/
+coverage.out
+
+# vscode
+.vscode/
+
+# unignore project folder in terragrunt path
+!**/ps-whoami-web/
+
+# terragrunt-cache
+.terragrunt-cache
+
+# terraform
+.terraform/
+terraform.tfstate*
+
+.cache
+.DS_Store
