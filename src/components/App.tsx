@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Typography from "@material-ui/core/Typography";
+import Result from "./Result";
 
 
 class App extends React.Component<{}, {
@@ -36,12 +37,9 @@ class App extends React.Component<{}, {
     }
 
     private fetchData(word: string) {
-        console.log("Trying to fetch data for word: ", word);
-
         this.setState({isLoading: true})
 
         const url = this.buildOpenthesaurusUri(word);
-        console.log("XXX - url: ", url);
         fetch(url)
             .then(response => response.json())
             .then(data => {
@@ -75,24 +73,7 @@ class App extends React.Component<{}, {
                     </form>
 
                     {this.state.data &&
-                        <>
-                            <h1>data has been loaded: </h1>
-                            <ul>
-                            {this.state.data.map(hit =>
-                                    <li key={hit.id}>
-                                        Katergory: {hit.categories}
-                                        <ul>
-                                            Synonym:
-                                            {hit.terms.map(term =>
-                                            <li key={term.term}>
-                                                {term.term}
-                                            </li>
-                                        )}
-                                        </ul>
-                                    </li>
-                                )}
-                            </ul>
-                        </>
+                        <Result content={this.state.data}/>
                     }
                 </div>
             </>
