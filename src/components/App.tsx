@@ -44,7 +44,7 @@ class App extends React.Component<{}, {
             .then(response => response.json())
             .then(data => {
                 console.table(data.hits)
-                this.setState({ data: data.synsets })});
+                this.setState({ data: data.synsets, isLoading: false })});
     }
     /**
      * The url should looks like 'https://www.openthesaurus.de/synonyme/search?q=aq&format=application/json&substring=true';
@@ -59,7 +59,13 @@ class App extends React.Component<{}, {
     }
 
     render() {
-        console.table(this.state.data? this.state.data : "");
+        const { data, word, isLoading } = this.state;
+        console.table(data? data : "");
+
+        if (isLoading) {
+            return <p>Loading ...</p>;
+        }
+
         return (
             <>
                 <div>
@@ -67,13 +73,13 @@ class App extends React.Component<{}, {
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Word:
-                            <input type="text" value={this.state.word} onChange={this.handleChange}/>
+                            <input type="text" value={word} onChange={this.handleChange}/>
                         </label>
                         <input type="submit" value="Submit"/>
                     </form>
 
-                    {this.state.data &&
-                        <Result content={this.state.data}/>
+                    {data &&
+                        <Result content={data}/>
                     }
                 </div>
             </>
